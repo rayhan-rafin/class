@@ -8,6 +8,7 @@ void insertAtEnd();
 void insertAtMid(int position);
 void DeleteFromBegining();
 void DeleteFromEnd();
+void DeleteFromMid(int position);
 struct node
 {
     int data;
@@ -34,6 +35,11 @@ int main ()
 //    cout<<"Data in new list are: "<<endl;
 //    display();
     DeleteFromBegining();
+    cout<<"Data in new list are: "<<endl;
+    display();
+    cout<<"Enter the position you want to delete"<<endl;
+    cin>>position;
+    DeleteFromMid(position);
     cout<<"Data in new list are: "<<endl;
     display();
     DeleteFromEnd();
@@ -113,6 +119,18 @@ void DeleteFromBegining()
     struct node *current;
     current = head;
     head = head->next;
+    free(current);
+}
+
+void DeleteFromMid(int position)
+{
+    struct node *current,*previous;
+    current = head;
+    for (int i=1;i<position;i++){
+        previous = current;
+        current = current->next;
+    }
+    previous->next = current->next;
     free(current);
 }
 
