@@ -1,11 +1,39 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+void createlist(int n);
+void display();
+void insertAtBegining();
+void insertAtEnd();
+void insertAtMid(int position);
 struct node
 {
     int data;
     struct node *next;
 }*head;
+
+int main ()
+{
+    int n,position;
+    cout<<"Enter number: ";
+    cin>>n;
+    createlist(n);
+    cout<<"Data in the list are: "<<endl;
+    display();
+    insertAtBegining();
+    cout<<"Data in the new list are: "<<endl;
+    display();
+    cout<<"Enter the position where you want to insert your newnode"<<endl;
+    cin>>position;
+    insertAtMid(position);
+    cout<<"Data in new list are: "<<endl;
+    display();
+    insertAtEnd();
+    cout<<"Data in new list are: "<<endl;
+    display();
+    return 0;
+}
+
 void createlist(int n)
 {
     struct node *newnode,*current;
@@ -42,13 +70,28 @@ void insertAtBegining()
     newnode->next = head;
     head = newnode;
 }
+
+void insertAtMid(int position)
+{
+    struct node *current,*newnode;
+    current = head;
+    for (int i =1;i<position-1;i++){
+        current = current->next;
+    }
+    newnode = (struct node*)malloc(sizeof(struct node));
+    cout<<"Enter the value you want to insert in the linked list"<<endl;
+    cin>>newnode->data;
+    newnode->next = current->next;
+    current->next = newnode;
+}
+
 void insertAtEnd()
 {
     struct node *current,*newnode;
     current=head;
-    while(current!=NULL)
+    while(current->next!=NULL)
     {
-        //current = current->next;
+        current = current->next;
     }
     newnode = (struct node*)malloc(sizeof(struct node));
     cout<<"Enter the value you want to insert at the End"<<endl;
@@ -56,6 +99,7 @@ void insertAtEnd()
     newnode->next = NULL;
     current->next = newnode;
 }
+
 void display ( )
 {
     struct node *current;
@@ -65,20 +109,4 @@ void display ( )
         cout<<current->data<<endl;
         current = current->next;
     }
-}
-int main ()
-{
-    int n;
-    cout<<"Enter number: ";
-    cin>>n;
-    createlist(n);
-    cout<<"Data in the list are: "<<endl;
-    display();
-    insertAtBegining();
-    cout<<"Data in the new list are: "<<endl;
-    display();
-    insertAtEnd();
-    cout<<"Data in new list are: "<<endl;
-    display();
-    return 0;
 }
