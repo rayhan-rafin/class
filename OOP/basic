@@ -2,7 +2,7 @@ public class main {
     public static void main(String[] args)
     {
         student obj=new student();
-        obj.storeinfo("Rayhan","213-15-4278",4.26);
+        obj.info("Rayhan","213-15-4278",4.26);
         obj.display();
         System.out.println();
     }
@@ -11,8 +11,8 @@ public class main {
 public class student {
     String name;
     String id;
-    double cgpa;
-    void storeinfo(String n, String i, double c)
+    float cgpa;
+    void info(String n, String i, float c)
     {
         name=n;
         id=i;
