@@ -1,11 +1,11 @@
 public interface A {
-    public void M();
+    public abstract void M();      //same with no abstract keyword,interface is 100% abstract; auto added when inteface created.
 }
 
 
 ---------------------------------------------
   public interface B {
-    public void M();
+    public abstract void M();
 }
 
 
