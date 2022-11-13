@@ -4,13 +4,13 @@ public interface A {
 
 
 ---------------------------------------------
-  public interface B {
+ public interface B {
     public abstract void M();
 }
 
 
 ---------------------------------------------
-  public class C implements A,B {
+ public class C implements A,B {
     public void M(){
         System.out.println("Okay");
     }
@@ -18,7 +18,7 @@ public interface A {
 
 
 --------------------------------------------
-  public class test extends C {
+ public class test extends C {
     public static void main (String[] args){
         C obj = new C();
         obj.M();
