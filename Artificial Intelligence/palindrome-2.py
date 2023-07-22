@@ -1,6 +1,6 @@
 count = 0
 z= 100
-a=[]  
+a=["rayhan","shibly"] 
 for i in range  (100,1000,1):
     for j in range (z,1000,1):
         x=i*j
