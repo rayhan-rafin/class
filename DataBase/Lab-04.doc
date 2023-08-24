@@ -14,3 +14,8 @@ SELECT * FROM customers WHERE Country = 'Germany' AND CustomerID<10;
 SELECT * FROM customers WHERE Country = 'Germany' AND (CustomerID<10  AND  CustomerID>2);
 SELECT * FROM customers WHERE Country = 'Germany' AND CustomerID BETWEEN 5 AND 10 ;
 
+SELECT CustomerName FROM customers
+WHERE CustomerName LIKE 'A%';
+
+SELECT CustomerName FROM customers
+WHERE CustomerName LIKE '%A';
