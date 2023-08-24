@@ -19,3 +19,13 @@ WHERE CustomerName LIKE 'A%';
 
 SELECT CustomerName FROM customers
 WHERE CustomerName LIKE '%A';
+
+// 
+POLASH
+P% = FIRST LETTER P 
+%H = LAST LETTER H
+%OL% = MIDDLE OL
+_H%  = SECOND LETTER H
+P_%  = FIRST LETTER P AND HAS 2+ LETTER
+P%H = FIRST LETTER P, LAST LETTER H
+//
