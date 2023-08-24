@@ -9,3 +9,8 @@ SELECT PRODUCTNAME FROM PRODUCTS WHERE PRICE>=20;
 
 SELECT ProductName,Price FROM PRODUCTS WHERE PRODUCTNAME = 'Tofu' OR PRODUCTNAME = 'Ikura';
 
+SELECT * FROM customers WHERE Country = 'Germany' OR City = 'London';
+SELECT * FROM customers WHERE Country = 'Germany' AND CustomerID<10;
+SELECT * FROM customers WHERE Country = 'Germany' AND (CustomerID<10  AND  CustomerID>2);
+
+
