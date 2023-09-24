@@ -1,0 +1,9 @@
+Router>en
+Router#config t
+Enter configuration commands, one per line. End with CNTL/Z.
+Router(config)#ip dhcp pool R2
+Router(dhcp-config)#network 153.153.0.0 255.255.0.0
+Router(dhcp-config)#default-router 153.153.0.1
+Router(dhcp-config)#int f0/0
+Router(config-if)#ip add 153.153.0.1 255.255.0.0
+Router(config-if)#no shut
