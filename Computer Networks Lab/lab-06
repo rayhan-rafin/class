@@ -1,0 +1,48 @@
+; Declare vlan
+Switch>en
+Switch#config t
+Switch(config)#vlan 500
+Switch(config-vlan)#ex
+Switch(config)#vlan 505
+Switch(config-vlan)#ex
+
+; define
+Switch(config)#int range f0/1-4
+Switch(config-if-range)#switchport mode access
+Switch(config-if-range)#switchport access vlan 500
+Switch(config-if-range)#ex
+
+Switch(config)#int range f0/5-8
+Switch(config-if-range)#switchport mode access
+Switch(config-if-range)#switchport access vlan 505
+Switch(config-if-range)#ex
+
+; trunk non end
+Switch(config)#int f0/21
+Switch(config-if)#switchport mode trunk
+Switch(config-if)#ex
+
+Switch(config)#int f0/24
+Switch(config-if)#switchport mode trunk
+Switch(config-if)#ex
+
+; physical on
+Router>en
+Router#config t
+Router(config)#int f0/0
+Router(config-if)#no shut
+Router(config-if)#ex
+
+;virtual on
+Router(config)#int f0/0.1
+Router(config-subif)#encapsulation dot1q 500
+Router(config-subif)#ip add 192.168.10.1 255.255.255.192
+Router(config-subif)#no shut
+Router(config-subif)#ex
+
+Router(config)#int f0/0.2
+Router(config-subif)#encapsulation dot1q 505
+Router(config-subif)#ip add 192.168.12.1 255.255.255.192
+Router(config-subif)#no shut
+Router(config-subif)#ex
+
