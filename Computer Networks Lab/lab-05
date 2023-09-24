@@ -1,0 +1,7 @@
+Router>en
+Router#config t
+Router(config)#router ospf 100
+Router(config-router)#network 152.152.0.0 0.0.255.255 area 1
+Router(config-router)#network 158.158.156.0 0.0.3.255 area 1
+Router(config-router)#network 170.170.168.0 0.0.3.255 area 1
+Router(config-router)#network 160.160.160.0 0.0.3.255 area 1
