@@ -11,7 +11,7 @@ void main()
   int num1 =100;
   int num2 = 30;
   print("Addition is : ${add(num1,num2)}");
-  print("substraction is : ${sub(num1,num2)}");
+  print("subtraction is : ${sub(num1,num2)}");
   print("multiplication is : ${mul(num1,num2)}");
   print("double div is : ${div(num1,num2)}");
   print("int div is : ${div2(num1,num2)}");
