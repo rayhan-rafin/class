@@ -1,11 +1,12 @@
 import 'package:dart4/dart4.dart' as dart4;
 
-void reverseString(String name)
+String reverseString(String name)
 {
   String rev = "";
   for (int i =(name.length)-1 ;i>=0;i--){
     rev = rev+name[i];
   }
+  return rev;
 }
 
 void main()
