@@ -1,9 +1,6 @@
 
 P = 5
-
-
 R = 3
-
 
 def calculateNeed(need, maxm, allot):
 	for i in range(P):
@@ -32,54 +29,29 @@ def isSafe(processes, avail, maxm, allot):
 	for i in range(R):
 		work[i] = avail[i] 
 
-	# While all processes are not finished 
-	# or system is not in safe state. 
 	count = 0
 	while (count < P):
-		
-		# Find a process which is not finish 
-		# and whose needs can be satisfied 
-		# with current work[] resources. 
 		found = False
 		for p in range(P): 
-		
-			# First check if a process is finished, 
-			# if no, go for next condition 
+
 			if (finish[p] == 0): 
-			
-				# Check if for all resources 
-				# of current P need is less 
-				# than work
 				for j in range(R):
 					if (need[p][j] > work[j]):
 						break
 					
-				# If all needs of p were satisfied. 
-				if (j == R - 1): 
-				
-					# Add the allocated resources of 
-					# current P to the available/work 
-					# resources i.e.free the resources 
+				if (j == R - 1):                        # If all needs of p were satisfied. 
 					for k in range(R): 
 						work[k] += allot[p][k] 
 
-					# Add this process to safe sequence. 
 					safeSeq[count] = p
 					count += 1
 
-					# Mark this p as finished 
 					finish[p] = 1
-
 					found = True
-				
-		# If we could not find a next process 
-		# in safe sequence. 
 		if (found == False):
 			print("System is not in safe state")
 			return False
-		
-	# If system is in safe state then 
-	# safe sequence will be as below 
+            
 	print("System is in safe state.",
 			"\nSafe sequence is: ", end = " ")
 	print(*safeSeq) 
