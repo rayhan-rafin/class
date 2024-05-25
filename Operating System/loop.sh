@@ -6,8 +6,8 @@ done
 
 #while loop example
 n=0
-while [n<5]
+while ((n < 5))
 do
-echo hello
+    echo "hello"
+    ((n++))
 done
-
