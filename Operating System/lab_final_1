@@ -1,0 +1,59 @@
+#                             Online Bash Shell.
+#                 Code, Compile, Run and Debug Bash script online.
+# Write your code in this editor and press "Run" button to execute it.
+
+
+#!/bin/Bash
+read -p "enter num1: " num1
+read -p "enter num2: " num2
+read -p "enter num3: " num3
+
+
+if [ $num1 -gt $num2 -a $num1 -gt $num3 ]
+then
+if [ $num2 -gt $num3 ]
+then
+high=$num1
+mid=$num2
+low=$num3
+else
+high=$num1
+mid=$num3
+low=$num2
+fi
+fi
+if [ $num2 -gt $num1 -a $num2 -gt $num3 ]
+then
+if [ $num1 -gt $num3 ]
+then
+high=$num2
+mid=$num1
+low=$num3
+else
+high=$num2
+mid=$num3
+low=$num1
+fi
+fi
+if [ $num3 -gt $num2 -a $num3 -gt $num1 ]
+then
+if [ $num2 -gt $num1 ]
+then
+high=$num3
+mid=$num2
+low=$num1
+else
+high=$num3
+mid=$num1
+low=$num2
+fi
+fi
+
+echo $low
+echo $mid
+echo $high
+
+sum=$(($low + $mid + $high))
+avg=$(($sum/3))
+dif=$(($avg-$mid))
+echo $dif
