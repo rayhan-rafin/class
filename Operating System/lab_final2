@@ -1,0 +1,22 @@
+#                             Online Bash Shell.
+#                 Code, Compile, Run and Debug Bash script online.
+# Write your code in this editor and press "Run" button to execute it.
+
+
+
+read -p "enter number: " num
+sum=1
+echo $sum
+for ((i=1;i<$num;i++))
+do
+mod=$((i%2))
+if [ $mod -eq 1 ]
+then
+sum=$(($sum+5))
+fi
+if [ $mod -eq 0 ]
+then
+sum=$(($sum-3))
+fi
+echo $sum
+done
