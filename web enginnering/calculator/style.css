@@ -1,0 +1,17 @@
+body {
+    text-align: center;
+    display: flex;
+    background-color: brown;
+    justify-content: center;
+    height:100vh;
+}
+
+.getdata {
+    margin-top: 30%;
+    text-align: center;
+    display: block;
+    background-color: antiquewhite;
+    height: 30%;
+    width: 40%;
+    border-radius: 20px;
+}
