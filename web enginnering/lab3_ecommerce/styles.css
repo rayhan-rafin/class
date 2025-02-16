@@ -1,0 +1,21 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+footer {
+  background-color: #343a40;
+  color: white;
+}
+
+footer a {
+  color: #f8f9fa;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+.product-grid {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 20px;
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+    <title>Checkout Page</title>
+    <link rel="stylesheet" href="checkout_style.css">
+</head>
+<body>
+    <div class="container">
+        <img src="images\Bkash-Logo.jpg" alt="Checkout Image" class="checkout-image">
+        <p>Enter bkash account and pin number</p>
+        <form action="/submit-checkout">
+            <div class="form-group">
+                <label for="bkash-number">bKash Number</label>
+                <input type="text" id="bkash-number" name="bkash-number" required>
+            </div>
+            <div class="form-group">
+                <label for="bkash-pin">bKash PIN</label>
+                <input type="password" id="bkash-pin" name="bkash-pin" required>
+            </div>
+            <button type="submit" class="btn">Place Order</button>
+        </form>
+    </div>
+</body>
+</html>
