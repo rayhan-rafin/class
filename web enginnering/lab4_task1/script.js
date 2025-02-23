@@ -14,7 +14,7 @@ document.getElementById('registrationForm').addEventListener('submit', function 
 
   //email validation
   const email = document.getElementById('email').value;
-  if (email === '' || !/^\S+\@\S+\.\S{3}$/.test(email)) {
+  if (email === '' || !/^\S+\@\S+\.\S{3}$/.test(email)) {                              //regex changed
     document.getElementById('emailError').textContent = 'Please enter a valid email.';
     valid = false;
   } else {
@@ -41,7 +41,7 @@ document.getElementById('registrationForm').addEventListener('submit', function 
 
   // Phone Validation
   const phone = document.getElementById('phone').value;
-  if (phone === '' || !/^01\d{9}$/.test(phone)) {
+  if (phone === '' || !/^01\d{9}$/.test(phone)) {                                      // BD starts with 01 and total 11 digits
     document.getElementById('phoneError').textContent = 'Please enter a valid 11-digit phone number.';
     valid = false;
   } else {
@@ -69,7 +69,7 @@ document.getElementById('registrationForm').addEventListener('submit', function 
 
   // Website Validation
   const website = document.getElementById('website').value;
-  if (website === '' || !/^https\S+$/.test(website)) {
+  if (website === '' || !/^https\S+$/.test(website)) {                //https check
     document.getElementById('websiteError').textContent = 'Please enter a valid website URL.';
     valid = false;
   } else {
@@ -91,6 +91,6 @@ document.getElementById('registrationForm').addEventListener('submit', function 
     // You can send the form data to the server here
   }
   else {
-    alert('Wrong form');
+    alert('Wrong form');               //wrong form
   }
 });
