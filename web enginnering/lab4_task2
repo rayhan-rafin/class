@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" 
+          content="width=device-width, initial-scale=1.0">
+    <title>Nested Tables</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 50px;
+        }
+
+        h2 {
+            color: green;
+        }
+
+        table {
+            border: 2px solid green;
+            margin: 20px auto;
+        }
+
+        table table {
+            border: 2px solid blue;
+            margin: 10px auto;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>CSE Batch</h2>
+    <table border="2">
+        <tr>
+            <td>60_B</td>
+            <td>60_B1
+                <table border="2">
+                    <tr>
+                        <td>Rayhan</td>
+                        <td>Hisham</td>
+                        <td>Alo</td>
+                    </tr>
+                    <tr>
+                        <td>Shibly</td>
+                        <td>Sayonee</td>
+                        <td>Mim</td>
+                    </tr>
+                </table>
+            </td>
+            <td>60_B2
+              <table border ="2">
+                <tr>
+                  <td>Sazzad</td>
+                  <td>Nezoom</td>
+                  <td>Likhan</td>
+                </tr>
+                <tr>
+                  <td>Mustahid</td>
+                  <td>Ramit</td>
+                  <td>Troyee</td>
+                </tr>
+              </table>
+            </td>
+        </tr>
+        <tr>
+          <td>60_C</td>
+            <td>60_C1
+                <table border="2">
+                    <tr>
+                        <td>Sakib</td>
+                        <td>Salman</td>
+                        <td>Rakib</td>
+                    </tr>
+                    <tr>
+                        <td>Saleh</td>
+                        <td>Emon</td>
+                        <td>Shohaib</td>
+                    </tr>
+                </table>
+            </td>
+            <td>60_C2
+              <table border ="2">
+                <tr>
+                  <td>Ashab</td>
+                  <td>Ratul</td>
+                  <td>Samrat</td>
+                </tr>
+                <tr>
+                  <td>Abdur</td>
+                  <td>Rahman</td>
+                  <td>Sarmin</td>
+                </tr>
+              </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>
