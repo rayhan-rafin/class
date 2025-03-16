@@ -28,7 +28,7 @@ void Draw()
 
    glutPostRedisplay();
 
-   glBegin(GL_QUADS);
+   glBegin(GL_QUADS);            //clockwise
    glVertex2f(40,y);
    glVertex2f(50,y);
    glVertex2f(50,y-20);
