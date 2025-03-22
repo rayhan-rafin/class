@@ -33,16 +33,23 @@ float grassStart2 = grassStart+100;
 //cloud
 float cloudx=0, cloudy = 720;
 //UFO
-float ufoSize = 10;
+float ufoSize = 12;
 float ufoPosx = 1600;
 float ufoPosy = 780;
-
+float ufoLightHeight=0;
+bool ufoLightFlag = 1;
+// Target sheep
+float TargetSheepSize = 5;
+float TargetSheepy = 100;
 //functions
 void moveUFO(int value);
 void moveUFO1 (int value);
 void moveUFO2 (int value);
 void moveUFO3 (int value);
-void drawUFOLight();
+void drawUFOLight(int value);
+void drawUFOLight1(int value);
+void drawUFOLight2(int value);
+void abductSheep (int value);
 
 
 void init(void)
@@ -373,34 +380,34 @@ void drawSheep(float x, float y, int direction)
 }
 
 
-void drawTargetSheep(float x, float y)
+void drawTargetSheep(float x, float y, float size)               //all component respond to size. division by 5
 {
     glColor3f(0,0,0);       //black color
-    circle(10,10,x+33,y-8);   //head
-    circle(30,20,x,y);      //body background
-    circle(5,5,x-32,y+5);   //tail
+    circle(size*2,size*2,x+size*6.6,y-size*1.6);   //head
+    circle(size*6,size*4,x,y);      //body background
+    circle(size,size,x-size*6.4,y+size);   //tail
 
     //legs
     glBegin(GL_LINES);
-    glVertex2f(x-10, y);
-    glVertex2f(x-10, y-25);
+    glVertex2f(x-size*2, y);
+    glVertex2f(x-size*2, y-size*5);
     glEnd();
     glBegin(GL_LINES);
-    glVertex2f(x-15, y);
-    glVertex2f(x-15, y-25);
+    glVertex2f(x-size*3, y);
+    glVertex2f(x-size*3, y-size*5);
     glEnd();
     glBegin(GL_LINES);
-    glVertex2f(x+10, y);
-    glVertex2f(x+10, y-25);
+    glVertex2f(x+size*2, y);
+    glVertex2f(x+size*2, y-size*5);
     glEnd();
     glBegin(GL_LINES);
-    glVertex2f(x+15, y);
-    glVertex2f(x+15, y-25);
+    glVertex2f(x+size*3, y);
+    glVertex2f(x+size*3, y-size*5);
     glEnd();
 
     glColor3f(1,1,1);       //white color
-    circle(28,18,x,y);      //body
-    circle(2,2,x+37,y-12);   //eye
+    circle(5.6*size,3.6*size,x,y);      //body
+    circle(0.4*size,0.4*size,x+7.4*size,y-2.4*size);   //eye
 }
 
 
@@ -471,7 +478,7 @@ void drawAllSheeps()
 {
     drawSheep(sheep1x,100,sheep1Dir);
     drawSheep(sheep2x,150,sheep2Dir);
-    drawTargetSheep(500,100);
+    drawTargetSheep(500,TargetSheepy,TargetSheepSize);
 }
 
 
@@ -843,51 +850,59 @@ void drawAllClouds()
 void drawUFO()
 {
     glColor3f(1,1,1);                           //dome
-    circle(ufoSize,ufoSize,ufoPosx,ufoPosy);
+    circle((ufoSize*1.5),ufoSize,ufoPosx,ufoPosy);
     glColor3f(0,0,1);                           //body
-    circle (ufoSize*3,ufoSize,ufoPosx,(ufoPosy-ufoSize));
+    circle (ufoSize*4,ufoSize,ufoPosx,(ufoPosy-ufoSize));
     glutPostRedisplay;
 }
 
 
 
-void moveUFO1(int value){
+void moveUFO1(int value)
+{
     if (ufoPosx>1000)
     {
         ufoPosx-=1;
         drawUFO();
         glutTimerFunc(10, moveUFO1, 0);
     }
-    else{
+    else
+    {
         glutTimerFunc(1000, moveUFO2, 0);
     }
 }
 
-void moveUFO2 (int value){
-    if (ufoPosx>=500){
+void moveUFO2 (int value)
+{
+    if (ufoPosx>=500)
+    {
         ufoPosy =  sqrt(288.8*ufoPosx-144400)+400;                             //288.8x = (y-400)^2 + 144400, check dc
         ufoSize = -(3*ufoPosy/38)+71.579;                            //goes through (780,10) and (400,40) point
         drawUFO();
         glutTimerFunc(5, moveUFO2, 0);
         ufoPosx-=1;
     }
-    else {
+    else
+    {
         glutPostRedisplay();
-        glutTimerFunc(3000, moveUFO3, 0);
+        glutTimerFunc(2500, moveUFO3, 0);
     }
 }
 
-void moveUFO3 (int value){
-    if(ufoPosy<900){
+void moveUFO3 (int value)
+{
+    if(ufoPosy<900)
+    {
         ufoPosy+=1;
         ufoSize = -(3*ufoPosy/38)+71.579;
         drawUFO();
         glutTimerFunc(5, moveUFO3, 0);
     }
-    else {
+    else
+    {
         ufoPosx = 1600;
         ufoPosy = 780;
-        ufoSize = 10;
+        ufoSize = 12;
         moveUFO(0);
     }
 }
@@ -900,17 +915,55 @@ void moveUFO(int value)
     moveUFO1(0);
 
 }
-void drawUFOLight(){
-    glColor3f(1,1,0);
-    circle (ufoSize/2,ufoSize/3,ufoPosx,(ufoPosy-ufoSize));
+void drawUFOLight1(int value)
+{
 
-    for (int i=0; i<300;i++){
-        glColor4f(1,1,0,0.3);
-        inverseHalfCircle(i,i,ufoPosx,(ufoPosy-ufoSize));
+    glColor4f(1,1,0,0.3);
+    inverseHalfCircle(ufoLightHeight,ufoLightHeight,ufoPosx,(ufoPosy-ufoSize));
+    if (ufoLightHeight==300){
+        ufoLightFlag =0;
     }
-    glutPostRedisplay();
+    if (ufoLightHeight<300 && ufoLightFlag==1)
+    {
+        ufoLightHeight++;
+        glutTimerFunc(800, drawUFOLight1, 0);
+    }
+    else
+    {
+        glutTimerFunc(500, abductSheep, 0);
+        glutTimerFunc(2000, drawUFOLight2, 0);
+    }
 }
 
+void drawUFOLight2(int value)
+{
+
+    glColor4f(1,1,0,0.3);
+    inverseHalfCircle(ufoLightHeight,ufoLightHeight,ufoPosx,(ufoPosy-ufoSize));
+    if (ufoLightHeight>0 && ufoLightFlag==0)
+    {
+        ufoLightHeight--;
+        glutTimerFunc(800, drawUFOLight2, 0);
+    }
+}
+
+void drawUFOLight(int value)
+{
+    glutPostRedisplay();
+
+    drawUFOLight1(0);
+}
+
+void abductSheep (int value){
+    glutPostRedisplay ();
+    //float TargetSheepy = 100;
+    TargetSheepSize = -(0.0178*TargetSheepy)+6.78;               //goes through (100,5) and (380,0)
+    if (TargetSheepSize>0){
+        drawAllSheeps();
+        TargetSheepy++;
+        glutTimerFunc(500, abductSheep, 0);
+    }
+}
 void Draw()
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -929,12 +982,14 @@ void Draw()
     drawLightBulb();
     drawFlowers();
     drawAllClouds();
+    if (ufoPosx==499 && ufoPosy==400)
+    {
+        drawUFOLight(0);
+    }
     drawUFO();
     //drawUFOLight();
 
-    if (ufoPosx==499 && ufoPosy==400){
-        drawUFOLight();
-    }
+
 
     //drawing now-------------------------------------------------------------------------------------------------
 
