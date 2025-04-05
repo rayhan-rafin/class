@@ -3,6 +3,7 @@
 #include <GL/glut.h>
 #include <cmath>
 #include <stdio.h>
+#include <utility>
 
 
 #define HORIZON_DISTANCE 400
@@ -38,6 +39,7 @@ float ufoPosx = 1600;
 float ufoPosy = 780;
 float ufoLightHeight=0;
 bool ufoLightFlag = 1;
+bool ufoLeft = false;
 // Target sheep
 float TargetSheepSize = 5;
 float TargetSheepy = 100;
@@ -50,7 +52,14 @@ void drawUFOLight(int value);
 void drawUFOLight1(int value);
 void drawUFOLight2(int value);
 void abductSheep (int value);
-
+//car
+float carX = -160;
+float carY = 350;
+float red1x1 = 70, red1x2 = 78;
+float blue1x1 = 86, blue1x2 = 78;
+//jet
+float jetX = 1600;
+float jetY = 780;
 
 void init(void)
 {
@@ -847,6 +856,108 @@ void drawAllClouds()
     drawCloudSet1();
     drawCloudSet2();
 }
+
+
+void moveCar(int value){
+    if(carX<300){
+        carX+=0.05;
+        glutTimerFunc(20, moveCar, 0);
+    }
+}
+
+
+void drawCar(){
+    //lower body
+    glColor3f(0.15,0.15,0.15);
+    glBegin(GL_POLYGON);
+    glVertex2f(carX-150, carY);
+    glVertex2f(carX, carY);
+    glVertex2f(carX, carY+10);
+    glVertex2f(carX-20, carY+20);
+    glVertex2f(carX-130, carY+20);
+    glVertex2f(carX-150, carY+10);
+    glEnd();
+
+
+    //upper body
+    glColor3f(1,1,1);
+    glBegin(GL_POLYGON);
+    glVertex2f(carX-125, carY+20);
+    glVertex2f(carX-30, carY+20);
+    glVertex2f(carX-40, carY+40);
+    glVertex2f(carX-115, carY+40);
+    glEnd();
+
+    //glass
+    glColor3f(0.620f, 0.816f, 0.894f);
+    glBegin(GL_POLYGON);
+    glVertex2f(carX-123, carY+21);
+    glVertex2f(carX-32, carY+21);
+    glVertex2f(carX-40, carY+39);
+    glVertex2f(carX-115, carY+39);
+    glEnd();
+    glColor3f(1,1,1);
+    glLineWidth(2);
+    glBegin(GL_LINES);
+    glVertex2f(carX-78, carY+40);
+    glVertex2f(carX-78, carY+20);
+    glEnd();
+
+
+    //wheels
+    glColor3f(0,0,0);
+    circle(13, 13, carX-120, carY);
+    circle(13, 13, carX-30, carY);
+    glColor3f(0.3,0.3,0.3);
+    circle(5, 5, carX-120, carY);
+    circle(5, 5, carX-30, carY);
+
+    //headlight
+    glColor3f(1,1,0);
+    glBegin(GL_QUADS);
+    glVertex2f(carX-5, carY+5);
+    glVertex2f(carX, carY+5);
+    glVertex2f(carX, carY+10);
+    glVertex2f(carX-5, carY+10);
+    glEnd();
+
+    //rearlight
+    glColor3f(1,0,0);
+    glBegin(GL_QUADS);
+    glVertex2f(carX-150, carY+5);
+    glVertex2f(carX-145, carY+5);
+    glVertex2f(carX-145, carY+10);
+    glVertex2f(carX-150, carY+10);
+    glEnd();
+
+
+    //toplight
+    glLineWidth(5);
+    glColor3f(1,0,0);
+    glBegin(GL_LINES);
+    glVertex2f(carX-red1x1, carY+43);
+    glVertex2f(carX-red1x2, carY+43);
+    glEnd();
+    glColor3f(0,0,1);
+    glBegin(GL_LINES);
+    glVertex2f(carX-blue1x1, carY+43);
+    glVertex2f(carX-blue1x2, carY+43);
+    glEnd();
+
+    moveCar(0);
+}
+
+
+void blinkCarLight(int value){
+    std::swap(red1x1, blue1x1);
+    std::swap(red1x2, blue1x2);
+    glutTimerFunc(300, blinkCarLight, 0);
+}
+
+
+
+
+
 void drawUFO()
 {
     glColor3f(1,1,1);                           //dome
@@ -862,7 +973,7 @@ void moveUFO1(int value)
 {
     if (ufoPosx>1000)
     {
-        ufoPosx-=1;
+        ufoPosx-=2;
         drawUFO();
         glutTimerFunc(10, moveUFO1, 0);
     }
@@ -900,10 +1011,9 @@ void moveUFO3 (int value)
     }
     else
     {
-        ufoPosx = 1600;
-        ufoPosy = 780;
-        ufoSize = 12;
-        moveUFO(0);
+        ufoPosx = 1700;
+        ufoSize = 0;
+        ufoLeft = true;
     }
 }
 
@@ -925,8 +1035,8 @@ void drawUFOLight1(int value)
     }
     if (ufoLightHeight<300 && ufoLightFlag==1)
     {
-        ufoLightHeight++;
-        glutTimerFunc(800, drawUFOLight1, 0);
+        ufoLightHeight+=0.1;
+        glutTimerFunc(500, drawUFOLight1, 0);
     }
     else
     {
@@ -960,10 +1070,28 @@ void abductSheep (int value){
     TargetSheepSize = -(0.0178*TargetSheepy)+6.78;               //goes through (100,5) and (380,0)
     if (TargetSheepSize>0){
         drawAllSheeps();
-        TargetSheepy++;
+        TargetSheepy=TargetSheepy+0.2;
         glutTimerFunc(500, abductSheep, 0);
     }
 }
+
+void drawJet (){
+    //glutPostRedisplay();
+    glColor3f(0.2, 0.2, 0.2);
+    glBegin(GL_POLYGON);
+    glVertex2f(jetX,jetY);
+    glVertex2f(jetX+75, jetY-25);
+    glVertex2f(jetX+50, jetY-10);
+    glVertex2f(jetX+65, jetY);
+    glVertex2f(jetX+50, jetY+10);
+    glVertex2f(jetX+75, jetY+25);
+    if (jetX>-65){
+        jetX=jetX-2;
+    }
+    glEnd();
+}
+
+
 void Draw()
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -982,18 +1110,12 @@ void Draw()
     drawLightBulb();
     drawFlowers();
     drawAllClouds();
-    if (ufoPosx==499 && ufoPosy==400)
-    {
-        drawUFOLight(0);
-    }
+    if (ufoPosx==499 && ufoPosy==400) drawUFOLight(0);
     drawUFO();
-    //drawUFOLight();
-
-
-
-    //drawing now-------------------------------------------------------------------------------------------------
-
-    //------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    if(ufoLeft) {
+        drawCar();
+        drawJet();
+    }
     graph(100);
     glutSwapBuffers();
 }
@@ -1013,6 +1135,7 @@ int main(int argc, char** argv)
     moveFlowers (0);
     moveCloud (0);
     moveUFO(0);
+    blinkCarLight(0);
     glutMainLoop();
     return 0;
 }
